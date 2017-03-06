@@ -14,6 +14,7 @@ public class School {
         
         List<Student> school = Arrays.asList(
                 new Student("Fred", 2.7F, "Art", "History", "Journalism"),
+                new Student("Wendy", 3.2F, "Art", "History", "Journalism"),
                 new Student("Jim", 3.7F, "Math", "Physics"),
                 new Student("Sheila", 3.9F, "Engineering", "Tribology", "Statistics", "Astronomy")
         );
@@ -48,5 +49,14 @@ public class School {
                 .collect(Collectors.toList());
         
         System.out.println("All courses: " + courses);
+
+        System.out.println("------------------------------");
+        school.stream()
+                .filter(s->s.getGpa() > 3.0F)
+                .flatMap(s->s.getCourses().stream())
+                .distinct()
+                .sorted()
+                .forEach(s->System.out.println(s));
+        
     }
 }
