@@ -2,6 +2,7 @@ package school;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class School {
@@ -34,5 +35,18 @@ public class School {
         school.stream()
                 .flatMap(s->s.getCourses().stream())
                 .forEach(s->System.out.println(s));
+
+        System.out.println("------------------------------");
+        System.out.println("Stats: " + school.stream()
+                .mapToDouble(s->s.getGpa())
+//                .peek(s->System.out.println("Looking at " + s + " which is " + s.getClass().getName()))
+                .summaryStatistics());
+
+        System.out.println("------------------------------");
+        List<String> courses = school.stream()
+                .flatMap(s->s.getCourses().stream())
+                .collect(Collectors.toList());
+        
+        System.out.println("All courses: " + courses);
     }
 }
